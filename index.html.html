@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forgiveness Journey</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: #ff6ec7;
+    }
+
+    .forgiveness-prompt {
+      display: block;
+    }
+
+    .forgiveness-jar {
+      display: none;
+      text-align: center;
+    }
+
+    .fishbowl {
+      position: absolute;
+      bottom: 50px;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.3));
+      border: 10px solid #ff6ec7;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .paper {
+      width: 200px;
+      height: 120px;
+      background-color: #fff;
+      color: #ff6ec7;
+      border: 2px solid #ff6ec7;
+      margin: 0 auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      padding: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      border-radius: 8px;
+      display: block;
+      opacity: 1; /* Paper is visible from the start */
+    }
+
+    .falling {
+      animation: fall 2s ease forwards, fold 1s ease-in-out forwards, fadeIn 1s ease forwards;
+    }
+
+    @keyframes fall {
+      0% {
+        top: 50%;
+      }
+      100% {
+        top: calc(100% - 200px);
+      }
+    }
+
+    @keyframes fold {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(0.3) rotate(180deg);
+      }
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    button {
+      background-color: #ff6ec7;
+      color: #000;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #fff;
+      color: #ff6ec7;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Forgiveness Prompt Section -->
+  <div class="forgiveness-prompt">
+    <h1>My Jaan 💖</h1>
+    <p>Hey, I know I forgot about the date, so will you forgive me for my mistake (again)?</p>
+    <p>Ik you forgive me a lot, so why not add this mistake also in the forgiving jar 👉🏻👈🏻</p>
+    <button id="forgaveButton">You Forgave Me</button>
+    <button id="didntForgiveButton">You Didn't Forgive Me</button>
+  </div>
+
+  <!-- Forgiveness Jar Section -->
+  <div class="forgiveness-jar">
+    <h1>Forgiveness Jar</h1>
+    <div class="fishbowl">
+      <div id="paperSlip" class="paper">Forgot 5 months anniversary</div>
+    </div>
+  </div>
+
+  <script>
+    // Get the buttons and sections
+    const forgaveButton = document.getElementById("forgaveButton");
+    const didntForgiveButton = document.getElementById("didntForgiveButton");
+    const forgivenessPrompt = document.querySelector(".forgiveness-prompt");
+    const forgivenessJar = document.querySelector(".forgiveness-jar");
+    const paper = document.getElementById("paperSlip");
+
+    // Handle the "You Forgave Me" button click
+    forgaveButton.addEventListener("click", () => {
+      // Hide the forgiveness prompt
+      forgivenessPrompt.style.display = "none";
+      
+      // Show the forgiveness jar
+      forgivenessJar.style.display = "block";
+      
+      // Start the forgiveness jar animation after 5 seconds
+      setTimeout(() => {
+        paper.classList.add("falling"); // Trigger the fall, fold, and fade-in animation
+        
+        setTimeout(() => {
+          paper.style.top = "calc(100% - 200px)";  // Position it inside the fishbowl
+        }, 3000); // Wait until the paper falls before animating into the bowl
+      }, 5000); // Wait for 5 seconds before starting the animation
+    });
+
+    // Handle the "You Didn't Forgive Me" button click (optional)
+    didntForgiveButton.addEventListener("click", () => {
+      alert("Please forgive me, my jaan 🥺");
+    });
+  </script>
+
+</body>
+</html>
